@@ -3,7 +3,7 @@ package queue
 import "errors"
 
 const (
-	defaultQueueSize=11     // max 10 elements
+	defaultQueueSize=10     // max 10 elements
 )
 
 var queueSize int
@@ -19,8 +19,8 @@ type Queue struct{
 
 func NewQueueBySize(size int) *Queue {
 
-	queueSize = size
-	return &Queue{0, size-1, 0, make([]interface{},size)}
+	queueSize = size+1    // one node is not used, but it is reserved for boundary check
+	return &Queue{0, size, 0, make([]interface{},size+1)}
 }
 
 func NewQueue() *Queue{
